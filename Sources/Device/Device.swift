@@ -14,27 +14,27 @@ import UIKit
 public class Device: ObservableObject {
     public static let current = Device()
     
-    var name: String
-    var userName: String?
-    var model: String
-    var systemName: String
-    var systemVersion: String
-    var operatingSystemVersion: OperatingSystemVersion { processInfo.operatingSystemVersion }
-    var operatingSystemVersionString: String { processInfo.operatingSystemVersionString }
-    var processorCount: Int { processInfo.processorCount }
-    var activeProcessorCount: Int { processInfo.activeProcessorCount }
-    var isMacCatalystApp: Bool { processInfo.isMacCatalystApp }
-    var isIOSAppOnMac: Bool { processInfo.isiOSAppOnMac }
-    var userInterfaceIdiom: UserInterfaceIdiom = UserInterfaceIdiom.current
+    public var name: String
+    public var userName: String?
+    public var model: String
+    public var systemName: String
+    public var systemVersion: String
+    public var operatingSystemVersion: OperatingSystemVersion { processInfo.operatingSystemVersion }
+    public var operatingSystemVersionString: String { processInfo.operatingSystemVersionString }
+    public var processorCount: Int { processInfo.processorCount }
+    public var activeProcessorCount: Int { processInfo.activeProcessorCount }
+    public var isMacCatalystApp: Bool { processInfo.isMacCatalystApp }
+    public var isIOSAppOnMac: Bool { processInfo.isiOSAppOnMac }
+    public var userInterfaceIdiom: UserInterfaceIdiom = UserInterfaceIdiom.current
         
-    @Published var thermalState: ProcessInfo.ThermalState
+    @Published public var thermalState: ProcessInfo.ThermalState
     
-    let battery = Battery()
+    public let battery = Battery()
     
     private let thermalStatePublisher = NotificationCenter.default.publisher(for: ProcessInfo.thermalStateDidChangeNotification)
     private let processInfo = ProcessInfo.processInfo
     
-    var systemUptime: TimeInterval {
+    public var systemUptime: TimeInterval {
         processInfo.systemUptime
     }
     
@@ -95,24 +95,24 @@ public class Device: ObservableObject {
 
 // MARK: - Structure -
 
-struct DeviceDetails: Codable {
-    let name: String
-    let userName: String?
-    let model: String
-    let systemName: String
-    let systemVersion: String
-    let isBatteryMonitoringEnabled: Bool
-    let operatingSystemVersion: OperatingSystemVersion
-    let processorCount: Int
-    let thermalState: ProcessInfo.ThermalState
-    let batteryPercentage: Int
-    let isLowPowerModeEnabled: Bool
+public struct DeviceDetails: Codable {
+    public let name: String
+    public let userName: String?
+    public let model: String
+    public let systemName: String
+    public let systemVersion: String
+    public let isBatteryMonitoringEnabled: Bool
+    public let operatingSystemVersion: OperatingSystemVersion
+    public let processorCount: Int
+    public let thermalState: ProcessInfo.ThermalState
+    public let batteryPercentage: Int
+    public let isLowPowerModeEnabled: Bool
     
-    var systemUptime: TimeInterval {
+    public var systemUptime: TimeInterval {
         ProcessInfo.processInfo.systemUptime
     }
     
-    init() {
+    public init() {
         let processInfo = ProcessInfo.processInfo
         
         #if os(macOS)
@@ -140,7 +140,6 @@ struct DeviceDetails: Codable {
         self.batteryPercentage = Battery().percentage
     }
 }
-
 
 // MARK: - Conformances
 
