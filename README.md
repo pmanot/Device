@@ -7,7 +7,8 @@ Device provides a cross-platform way to access device details such as the device
 * Cross-platform support for macOS, iOS, tvOS, watchOS
 * Battery monitoring with the Battery class
 * Thermal state monitoring
-# Installation
+
+## Installation
 You can add the Device framework to your project via Swift Package Manager. Simply go to File > Swift Packages > Add Package Dependency and enter the following URL: https://github.com/pmanot/Device.
 Usage
 To access device details and monitor the battery level, create an instance of the Device class:
