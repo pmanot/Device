@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "battery",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pmanot/Battery",
+      "state" : {
+        "branch" : "main",
+        "revision" : "40e9cc925afd4a47da3ff38f17bd4366716f515e"
+      }
+    }
+  ],
+  "version" : 2
+}
