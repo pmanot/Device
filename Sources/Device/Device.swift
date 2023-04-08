@@ -59,11 +59,7 @@ public class Device: ObservableObject {
         #endif
         
         self.thermalState = processInfo.thermalState
-        
-        //batteryLevelPublisher
-       //     .map { _ in UIDevice.current.batteryLevel }
-        //    .assign(to: &$batteryLevel)
-        
+
         thermalStatePublisher
             .map { _ in ProcessInfo.processInfo.thermalState }
             .assign(to: &$thermalState)
