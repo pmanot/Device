@@ -23,27 +23,27 @@ let device = Device.current
 
 You can then access the various properties of the Device class, such as the device name and model:
 ```swift
-print(device.name) // "iPhone" print(device.model) // "iPhone"
+print(device.name) // "iPhone" 
+print(device.model) // "iPhone"
+
 ```
 
 You can also monitor changes in the thermal state of the device:
 ```swift
-device.$thermalState
-      .sink { thermalState in 
-          print("Thermal state changed: \(thermalState)")
-      }
-      .store(in: &cancellables)
+device.$thermalState.sink { thermalState in 
+      print("Thermal state changed: \(thermalState)")
+}
+.store(in: &cancellables)
 ```
 
 Finally, you can monitor the battery level with the Battery class:
 ```swift
 let battery = Battery()
 
-battery.$level
-      .sink { level in 
-          print("Battery level changed: \(level)") 
-      }
-      .store(in: &cancellables)
+battery.$level.sink { level in 
+      print("Battery level changed: \(level)") 
+}
+.store(in: &cancellables)
 ```
 
 ## Contributing
