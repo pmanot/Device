@@ -15,7 +15,8 @@ public class Device: ObservableObject {
     public static let current = Device()
     
     public var name: String
-    public var userName: String?
+    public var userName: String
+    public var fullUserName: String
     public var model: String
     public var systemName: String
     public var systemVersion: String
@@ -26,6 +27,14 @@ public class Device: ObservableObject {
     public var isMacCatalystApp: Bool { processInfo.isMacCatalystApp }
     public var isIOSAppOnMac: Bool { processInfo.isiOSAppOnMac }
     public var userInterfaceIdiom: UserInterfaceIdiom = UserInterfaceIdiom.current
+    
+    public var environment: [String: String] {
+        ProcessInfo.processInfo.environment
+    }
+    
+    public var systemUptime: TimeInterval {
+        processInfo.systemUptime
+    }
         
     @Published public var thermalState: ProcessInfo.ThermalState
     
@@ -33,16 +42,10 @@ public class Device: ObservableObject {
     
     private let thermalStatePublisher = NotificationCenter.default.publisher(for: ProcessInfo.thermalStateDidChangeNotification)
     private let processInfo = ProcessInfo.processInfo
-    
-    public var systemUptime: TimeInterval {
-        processInfo.systemUptime
-    }
-    
-    
+
     private init() {
         #if os(macOS)
-        self.name = Host.current().name ?? processInfo.hostName
-        self.userName = processInfo.userName
+        self.name = Host.current().localizedName ?? processInfo.hostName
         self.model = "Mac"
         self.systemName = "macOS"
         self.systemVersion = String("\(processInfo.operatingSystemVersion.majorVersion).\(processInfo.operatingSystemVersion.minorVersion)")
@@ -52,12 +55,13 @@ public class Device: ObservableObject {
         let currentDevice = UIDevice.current
         
         self.name = currentDevice.name
-        self.userName = nil
         self.model = currentDevice.model
         self.systemName = currentDevice.systemName
         self.systemVersion = currentDevice.systemVersion
         #endif
         
+        self.userName = NSUserName()
+        self.fullUserName = NSFullUserName()
         self.thermalState = processInfo.thermalState
 
         thermalStatePublisher
